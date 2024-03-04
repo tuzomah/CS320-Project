@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Full Table</title>
+  <link rel="stylesheet" href="\stylesheets\assignment3.css">
+</head>
+<body>
+  <form action="/search-results" method="post">
+    <label for="userInput">Search database:</label>
+    <input type="text" id="userInput" name="userInput" size="30" required>
+    <button type="submit">Search</button>
+  </form>
+  <h2>"Logins" Table</h2>
+  <div class="table-data">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+      </tr>
+      <% if (userData.length !== 0) { %>
+        <% userData.forEach(function(data, index) { %>
+          <tr>
+            <td><%= data.id %></td>
+            <td><%= data.username %></td>
+            <td><%= data.password %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="7">No Data Found</td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+</body>
+  <div class="links">
+    <a href="/math">Do some math stuff</a>
+  </div>
+</html>
