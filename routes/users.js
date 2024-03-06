@@ -24,10 +24,43 @@ router.post('/login', (req, res) => {
       res.redirect('/home');
     }
     else {
-      res.redirect('/login');
+      res.render('loginerror');
     }
   });
 });
+
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+router.post('/signup', function(req, res, next) {
+  const username = req.body.username;
+  const password1 = req.body.password1;
+  const password2 = req.body.password2;
+  const defaultCoins = 100;
+  const sqlCheckPasswords = 'SELECT * FROM Logins WHERE Password = ?'
+  const sqlCheckUser = 'SELECT * FROM Logins WHERE Username = ?'
+  const sqlInsert = 'INSERT INTO Logins (`username`, `password`, `coins`) VALUES (?, ?, ?)';
+
+  db.query(sqlCheckPasswords, [`${password1}`, `${password2}`], (err, results) => {
+    if (password1 !== password2) {
+      res.render('signuppasswords');
+    }
+    else {
+      db.query(sqlCheckUser, [`${username}`], (err, results) => {
+        if (results.length > 0) {
+          res.render('signuperror');
+        } else {
+          db.query(sqlInsert, [`${username}`, `${password1}`, `${defaultCoins}`], (err, results) => {
+            if (err) throw err;
+            res.render('signupsuccess');
+          });
+        }
+      });
+    }
+  });
+});
+
 
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
@@ -43,7 +76,7 @@ router.get('/home', (req, res) => {
     res.render('resume');
 });
 
-router.get('/search', (req, res) => {
+router.get('/leaderboard', (req, res) => {
   const sql = 'SELECT * FROM Logins';
   db.query(sql, (err, data) => {
     if (err) throw err;
