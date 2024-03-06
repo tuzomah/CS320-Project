@@ -1,0 +1,20 @@
+CREATE SCHEMA IF NOT EXISTS rbs;
+
+USE rbs;
+
+CREATE TABLE IF NOT EXISTS Logins (
+	id INT UNIQUE PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    username VARCHAR(45) UNIQUE NOT NULL,
+    password VARCHAR(45) NOT NULL,
+	coins INT NOT NULL
+);
+
+ALTER TABLE Logins AUTO_INCREMENT=10000;
+
+INSERT INTO Logins VALUES
+	('10000', 'test', 'test', '100'),
+	('10001', 'jmachulcz', 'Machulcz97', '100'),
+    ('10002', 'lwirt', 'lwirt', '100'),
+    ('10003', 'tuzomah', 'tuzomah', '100');
+    
+SELECT * FROM Logins;
