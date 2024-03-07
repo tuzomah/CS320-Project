@@ -83,4 +83,12 @@ tr:hover {
   justify-content: center;
   align-items: center;
   margin: 0;
+  box-shadow: 
+          3.3px 2.6px 1.4px rgba(0, 0, 0, 0.077),
+          7.8px 6px 3.2px rgba(0, 0, 0, 0.112),
+          13.9px 10.7px 5.8px rgba(0, 0, 0, 0.138),
+          23.1px 17.8px 9.6px rgba(0, 0, 0, 0.162),
+          38.1px 29.4px 15.9px rgba(0, 0, 0, 0.188),
+          66.6px 51.3px 27.7px rgba(0, 0, 0, 0.223),
+          144px 111px 60px rgba(0, 0, 0, 0.3);
 }
