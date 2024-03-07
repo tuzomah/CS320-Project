@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #cde3f5;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 325px;
+    background-color: #5bafbd;
+}
+
+h1 {
+    font-family: "Tempus Sans ITC", sans-serif; 
+    color: #177073; 
+    margin-left: 12px;
+}
+
+.title-image {
+    margin-top: 20px; 
+    margin-left: 12px;
+    width: 270px; 
+    height: auto; 
+}
+
+.snowflake {
+    margin-left: 0px;
+    width: 325px;
+    height: auto;
+    opacity: 0.65;
+}
+
+.snowflake2 {
+      margin-left: 500px;
+      width: 325px; 
+      height: auto; 
+      opacity: 0.65;
+  }
+
+  .Xtree {
+    
+      margin-left: 33px;
+      border-radius: 15px;
+      width: 230px; 
+      height: 335px; 
+  }
+
+  .Duck {
+ 
+      margin-left: 9px;
+      width: 70px; 
+      height: 65px; 
+      margin-bottom: 25px;
+  }
+
+  .login {
+    margin-left: 5px; 
+    margin-top: 2px;
+    width: 185px; 
+    height: auto; 
+    margin-bottom: 25px;
+}
+
+
+.navigation {
+    position: relative; 
+    margin-top: 20px; 
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center; 
+}
+
+.navigation ul li {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center; 
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
+.divider {
+    width: 225px; 
+    height: 2px;
+    background-color: #8ccbdc; 
+    margin: 0 50px; 
+}
+
+.line {
+    position: absolute;
+    top: 0;
+    left: 325px; 
+    height: 100%;
+    width: 7px;
+    background-color: #e4edef; 
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 60px;
+    justify-content: center;
+    margin-top: 100px; /* Adjust as needed */
+    margin-left: 100px;
+}
+
+.image-container img {
+    width: 500px;
+    height: 400px;
+}
+
+.image-container img:nth-child(1):hover {
+    transform: translate(10px, 20px); /* Move the first image 5px to the right and 10px down on hover */
+}
+
+.image-container img:nth-child(2):hover {
+    transform: translate(10px, 20px); /* Move the second image 5px to the right and 10px down on hover */
+}
+
+.image-container img:nth-child(3):hover {
+    transform: translate(10px, 20px); /* Move the third image 5px to the right and 10px down on hover */
+}
+
+.image-container img:nth-child(4):hover {
+    transform: translate(10px, 20px); /* Move the fourth image 5px to the right and 10px down on hover */
+}
