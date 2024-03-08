@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="\stylesheets\cs320.css">
+</head>
+<body>
+  <h2>Login</h2>
+  <div class="loginform">
+    <form action="/login" method="post">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" id="usrnm" name="usrnm" required><br />
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="psswrd" name="psswrd" required><br />
+
+        <button type="submit">Login</button>
+    </form>
+  </div>
+</body>
+  <div class="contents">
+    <br />
+    Not a member?  Sign up!
+    <a href="/signup"><button>Sign Up</button></a>
+  </div>
+</html>

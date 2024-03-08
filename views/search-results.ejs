@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Search Results</title>
+  <link rel="stylesheet" href="\stylesheets\cs320.css">
+</head>
+<body>
+  <form action="/search-results" method="post">
+    <label for="userInput">Search database:</label>
+    <input type="text" id="userInput" name="userInput" required>
+    <button type="submit">Search</button>
+  </form>
+  <h2>Search Results from "Logins" Table</h2>
+  <div class="table-data">
+    <table border="1">
+       <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+	<th>Coins</th>
+      </tr>
+      <% if (userData.length !== 0) { %>
+        <% userData.forEach(function(data, index) { %>
+          <tr>
+            <td><%= data.id %></td>
+            <td><%= data.username %></td>
+            <td><%= data.password %></td>
+	    <td><%= data.coins %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="7">No Data Found</td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+</body>
+</html>

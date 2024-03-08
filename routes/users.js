@@ -73,7 +73,31 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/home', (req, res) => {
-    res.render('resume');
+    res.render('home');
+});
+
+router.get('/snakes', (req, res) => {
+  res.render('snakes');
+});
+
+router.get('/battleship', (req, res) => {
+  res.render('battleship');
+});
+
+router.get('/risk', (req, res) => {
+  res.render('risk');
+});
+
+router.get('/more', (req, res) => {
+  const sql = 'SELECT * FROM Logins';
+  db.query(sql, (err, data) => {
+    if (err) throw err;
+    res.render('more', { title: 'User List', userData: data });
+  });
+});
+
+router.get('/store', (req, res) => {
+  res.render('store');
 });
 
 router.get('/leaderboard', (req, res) => {

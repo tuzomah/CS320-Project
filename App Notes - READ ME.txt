@@ -12,4 +12,5 @@ In database.js use your mySQL username and password.  If you don't have a passwo
 The 'views' folder is where the html (or in this case ejs) files that show the webpages are:
 	Root page (localhost:3000/) will send the user to the login page
 	login.ejs = Login page
+	signup.ejs = Sign Up page
 	resume.ejs (we'll replace this with Lauren's home page) = Home page
