@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risk</title>
-    <link rel="stylesheet" href="\stylesheets\homecss.css">
+    <link rel="stylesheet" href="\stylesheets\risk.css">
 </head>
 <body>
     <div class="header">
         <h1><a href="/home">Risky Battlesnakes</a></h1>
+	<h2><%= username %> - <%= coins %>¢</h2>
         <div class="line"></div>
         <li class="divider2"></li>
         <div class="navigation">
@@ -19,9 +20,9 @@
                 <li class="divider"></li>
                 <li><a href="/risk"><z>Risk</z></a></li>
                 <li class="divider"></li>
-                <li><a href="/more">More+</a></li>
+                <li><a href="/leaderboard">Leaderboard</a></li>
                 <li class="divider"></li>
-                <li><a href="/store">Credits</a></li
+                <li><a href="/credits">Credits</a></li
             </ul>
             <li class="divider2"></li>
             <img src="/images/Xmas.png" alt="Title" class="Xtree">
@@ -29,10 +30,123 @@
             <a href="/login"><img src="/images/login.png" alt="Login" class="login"></a>
         </div>
     </div>
+    <div class="gamecontainer">
+        <div class="gameboard">
+            <img src="/images/GOT Risk.jpg" alt="Gameboard">
+        </div>
+        <div class="dice-container-attack"></div>
+        <div class="dice-container-defend"></div>
+        <button type="button" class="btn-roll-dice">Roll</button>
+        <script>
+            const attackResults = [];
+            const defendResults = [];
+
+            function createDice(number, attackDefend) {
+                const dotPositionMatrix = {
+                1: [
+                    [50, 50]
+                ],
+                2: [
+                    [20, 20],
+                    [80, 80]
+                ],
+                3: [
+                    [20, 20],
+                    [50, 50],
+                    [80, 80]
+                ],
+                4: [
+                    [20, 20],
+                    [20, 80],
+                    [80, 20],
+                    [80, 80]
+                ],
+                5: [
+                    [20, 20],
+                    [20, 80],
+                    [50, 50],
+                    [80, 20],
+                    [80, 80]
+                ],
+                6: [
+                    [20, 20],
+                    [20, 80],
+                    [50, 20],
+                    [50, 80],
+                    [80, 20],
+                    [80, 80]
+                ]
+            };
+
+        const dice = document.createElement("div");
+
+        if (attackDefend === "attack") {
+            dice.classList.add("attack-dice");
+        }
+        else if (attackDefend === "defend") {
+            dice.classList.add("defend-dice");
+        }
+
+        for(const dotPosition of dotPositionMatrix[number]) {
+            const dot = document.createElement("div");
+
+            dot.classList.add("dice-dot");
+            dot.style.setProperty("--top", dotPosition[0] + "%");
+            dot.style.setProperty("--left", dotPosition[1] + "%");
+            dice.appendChild(dot);
+        }
+
+        return dice;
+    }
+
+            function randomizeDice(diceContainer, numDice, attackDefend, resultsArray) {
+                diceContainer.innerHTML = "";
+                let dice;
+
+                for(let i=0; i<numDice; i++) {
+                    const random = Math.floor((Math.random() * 6) + 1);
+                    resultsArray.push(random);
+
+                    if (attackDefend === "attack") {
+                        dice = createDice(random, "attack");
+                    }
+                    else if (attackDefend === "defend") {
+                        dice = createDice(random, "defend");
+                    }
+
+                    diceContainer.appendChild(dice);
+                }
+            }
+
+            const diceContainerAttack = document.querySelector(".dice-container-attack");
+            const diceContainerDefend = document.querySelector(".dice-container-defend");
+            const btnRollDice = document.querySelector(".btn-roll-dice");
+
+            randomizeDice(diceContainerAttack, 3, "attack", attackResults);
+            randomizeDice(diceContainerDefend, 2, "defend", defendResults);
+
+            btnRollDice.addEventListener("click", () => {
+               attackResults.length = 0;
+               defendResults.length = 0;
+
+               const interval = setInterval(() => {
+                   randomizeDice(diceContainerAttack, 3, "attack", attackResults);
+                   randomizeDice(diceContainerDefend, 2, "defend", defendResults);
+               }, 50);
+
+               setTimeout(() => {
+                   clearInterval(interval);
+                   attackResults.splice(0,27);
+                   attackResults.sort();
+                   attackResults.reverse();
+                   defendResults.splice(0,18);
+                   defendResults.sort();
+                   defendResults.reverse();
+                   console.log("Attack Results:", attackResults);
+                   console.log("Defend Results:", defendResults);
+               }, 500);
+            });
+        </script>
+    </div>
 </body>
-<div class="content">
-    Under construction!<br />
-    Come back l8r!
-    <img src="/images/white3.png" alt="Rectangle 3">
-</div>
 </html>

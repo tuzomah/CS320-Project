@@ -1,12 +1,12 @@
 const express = require('express');
+const session = require('express-session');
 const router = express.Router();
 const db = require('../database');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const session = require('express-session');
+const { getCoins } = require('../util');
 
 router.get('/', (req, res) => {
-  const sessionData = req.session;
   res.redirect('/login');
 });
 
@@ -21,6 +21,9 @@ router.post('/login', (req, res) => {
 
   db.query(sql, [`${username}`, `${password}`], (err, results) => {
     if (results.length > 0) {
+      // Authentication successful
+      // Store the username in the session
+      req.session.username = username;
       res.redirect('/home');
     }
     else {
@@ -61,7 +64,6 @@ router.post('/signup', function(req, res, next) {
   });
 });
 
-
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -72,50 +74,48 @@ router.get('/logout', (req, res) => {
   });
 });
 
-router.get('/home', (req, res) => {
-    res.render('home');
-});
-
-router.get('/snakes', (req, res) => {
-  res.render('snakes');
-});
-
-router.get('/battleship', (req, res) => {
-  res.render('battleship');
-});
-
-router.get('/risk', (req, res) => {
-  res.render('risk');
-});
-
-router.get('/more', (req, res) => {
-  const sql = 'SELECT * FROM Logins';
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    res.render('more', { title: 'User List', userData: data });
-  });
-});
-
-router.get('/store', (req, res) => {
-  res.render('store');
+router.get('/home', async (req, res) => {
+  const username = req.session.username;
+  const coins = await getCoins(username);
+  res.render('home', { username, coins });
 });
 
 router.get('/leaderboard', (req, res) => {
-  const sql = 'SELECT * FROM Logins';
-  db.query(sql, (err, data) => {
-    if (err) throw err;
-    res.render('user-list', { title: 'User List', userData: data });
+  const username = req.session.username;
+  const sql = 'SELECT Coins FROM Logins WHERE Username = ?';
+
+  db.query(sql, [`${username}`], (err, results) => {
+    const coins = results[0].Coins;
+    const sqlTable = 'SELECT * FROM Logins';
+    db.query(sqlTable, (err, data) => {
+      if (err) throw err;
+      res.render('leaderboard', { username: username, coins: coins,title: 'User List', userData: data});
+    });
   });
 });
 
-router.post('/search-results', (req, res) => {
-  const userInput = req.body.userInput;
+router.get('/credits', (req, res) => {
+  const username = req.session.username;
+  const sql = 'SELECT Coins FROM Logins WHERE Username = ?';
 
-  const sql = 'SELECT * FROM Logins WHERE Username LIKE ?';
-  db.query(sql, [`%${userInput}%`], (err, data) => {
-    if (err) throw err;
-    res.render('search-results', { title: 'Search Results', userData: data });
+  db.query(sql, [`${username}`], (err, results) => {
+    const coins = results[0].Coins;
+    console.log('Coins:', coins); // Log the value of coins
+    res.render('credits', { username: username, coins: coins });
   });
+});
+
+router.get('/testsession', (req, res) => {
+  if (req.session && req.session.username) {
+    // Session exists and contains a username
+    const username = req.session.username;
+    // Proceed with handling the request
+    res.send(`Hello, ${username}!`);
+  } else {
+    // No session established or username not present in the session
+    // Handle this case, such as redirecting to login page or displaying an error message
+    res.send('You are not logged in.');
+  }
 });
 
 module.exports = router;

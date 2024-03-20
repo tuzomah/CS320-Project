@@ -16,14 +16,14 @@ body {
 }
 
 h1 {
-    font-family: "Tempus Sans ITC", sans-serif; 
-    color: #a35426; 
+    font-family: "Tempus Sans ITC", sans-serif;
+    color: #a35426;
     margin-left: 16px;
 }
 
 h2 {
-    font-family: "Tempus Sans ITC", sans-serif; 
-    color: white; 
+    font-family: "Tempus Sans ITC", sans-serif;
+    color: white;
     margin-left: 16px;
 }
 
@@ -34,52 +34,52 @@ a {
 }
 
 .title-image {
-    margin-top: 20px; 
+    margin-top: 20px;
     margin-left: 12px;
-    width: 270px; 
-    height: auto; 
+    width: 270px;
+    height: auto;
 }
 
-  .Xtree {
-      margin-top: 20px;    
-      margin-left: 5px;
-      border-radius: 15px;
-      width: 240px; 
-      height: 335px; 
-  }
+.Xtree {
+    margin-top: 20px;
+    margin-left: 5px;
+    border-radius: 15px;
+    width: 240px;
+    height: 335px;
+}
 
-  .Duck {
- 
-      margin-left: 9px;
-      width: 70px; 
-      height: 65px; 
-      margin-bottom: 30px;
-  }
+.Duck {
 
-  .login {
-    margin-left: 5px; 
+    margin-left: 9px;
+    width: 70px;
+    height: 65px;
+    margin-bottom: 30px;
+}
+
+.login {
+    margin-left: 5px;
     margin-top: 2px;
-    width: 185px; 
-    height: auto; 
+    width: 185px;
+    height: auto;
     margin-bottom: 25px;
 }
 
 
 .navigation {
-    position: relative; 
-    margin-top: 20px; 
+    position: relative;
+    margin-top: 20px;
 }
 
 .navigation ul {
     list-style-type: none;
     padding: 0;
-    text-align: center; 
+    text-align: center;
 }
 
 .navigation ul li {
     display: block;
     margin-bottom: 20px;
-    text-align: center; 
+    text-align: center;
 }
 
 .navigation ul li a {
@@ -95,27 +95,27 @@ a {
 }
 
 .divider {
-    width: 225px; 
+    width: 225px;
     height: 2px;
-    background-color: #8ccbdc; 
-    margin: 0 50px; 
+    background-color: #8ccbdc;
+    margin: 0 50px;
 }
 
 .divider2 {
-    width: 275px; 
+    width: 275px;
     height: 4px;
-    background-color: #1b88bb; 
-    margin: 0 25px; 
+    background-color: #1b88bb;
+    margin: 0 25px;
     overflow: hidden;
 }
 
 .line {
     position: absolute;
     top: 0;
-    left: 326px; 
+    left: 326px;
     height: 100%;
     width: 7px;
-    background-color: #e4edef; 
+    background-color: #e4edef;
 }
 
 .image-grid {
@@ -133,19 +133,19 @@ a {
 }
 
 .image-container img:nth-child(1):hover {
-    transform: translate(10px, 20px); 
+    transform: translate(10px, 20px);
 }
 
 .image-container img:nth-child(2):hover {
-    transform: translate(10px, 20px); 
+    transform: translate(10px, 20px);
 }
 
 .image-container img:nth-child(3):hover {
-    transform: translate(10px, 20px); 
+    transform: translate(10px, 20px);
 }
 
 .image-container img:nth-child(4):hover {
-    transform: translate(10px, 20px); 
+    transform: translate(10px, 20px);
 }
 
 .content {
@@ -184,4 +184,69 @@ tr:hover {
     position: fixed;
     float-right;
     top: 0;
+}
+
+/*-----------RISK CSS STUFF-----------*/
+
+.gamecontainer {
+    position: relative;
+    margin-left: 325px;
+}
+
+.gameboard {
+    float: left;
+    margin: 10px;
+}
+
+.dice-container-attack {
+    display: flex;
+}
+
+.dice-container-defend {
+    display: flex;
+}
+
+.attack-dice {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 5px;
+    background-color: darkred;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.defend-dice {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 5px;
+    background-color: darkblue;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+.dice-dot {
+    --top: 0%;
+    --left: 0%;
+
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+
+    /*Dot positioning*/
+    position: absolute;
+    top: var(--top);
+    left: var(--left);
+    transform: translateX(calc(var(--left) * -1)) translateY(calc(var(--top) * -1));
+}
+
+.btn-roll-dice {
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 120px;
+    height: 45px;
+    border-radius: 20px;
+    font-size: 30px;
 }

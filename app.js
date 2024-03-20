@@ -6,8 +6,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var session = require('express-session');
+var riskRouter = require('./routes/risk');
+var snakesRouter = require('./routes/snakes');
+var battleshipRouter = require('./routes/battleship');
 var mysql = require('mysql');
+const session = require('express-session');
 
 var app = express();
 var port = 3000;
@@ -15,21 +18,29 @@ var port = 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+
+// Session middleware
 app.use(session({
-  secret: 'secret-key',
-  resave: true,
-  saveUninitialized: false,
+  secret: 'your_unique_secret_key_here', // Change this to a secure key
+  resave: false,
+  saveUninitialized: true,
 }));
 
+// Routes
 app.use('/', usersRouter);
+app.use('/risk', riskRouter);
+app.use('/snakes', snakesRouter);
+app.use('/battleship', battleshipRouter);
 
+// Error handling middleware
 app.use(function(req, res, next) {
   next(createError(404));
 });

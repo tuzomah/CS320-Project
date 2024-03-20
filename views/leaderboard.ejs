@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snakes & Ladders</title>
+    <title>More+</title>
     <link rel="stylesheet" href="\stylesheets\homecss.css">
 </head>
 <body>
@@ -14,13 +14,13 @@
         <li class="divider2"></li>
         <div class="navigation">
             <ul>
-                <li><a href="/snakes"><z>Snakes and Ladders</z></a></li>
+                <li><a href="/snakes">Snakes and Ladders</a></li>
                 <li class="divider"></li>
                 <li><a href="/battleship">Battleship</a></li>
                 <li class="divider"></li>
                 <li><a href="/risk">Risk</a></li>
                 <li class="divider"></li>
-                <li><a href="/leaderboard">Leaderboard</a></li>
+                <li><a href="/leaderboard"><z>Leaderboard</z></a></li>
                 <li class="divider"></li>
                 <li><a href="/credits">Credits</a></li
             </ul>
@@ -32,8 +32,32 @@
     </div>
 </body>
 <div class="content">
-    Under construction!<br />
-    Come back l8r!
-    <img src="/images/white1.png" alt="Rectangle 1">
+  <div class="chart">
+  <h1>Leaderboard</h1>
+  <div class="table-data">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+	<th>Coins</th>
+        <th>Complete Games</th>
+      </tr>
+      <% if (userData.length !== 0) { %>
+        <% userData.forEach(function(data, index) { %>
+          <tr>
+            <td><%= data.id %></td>
+            <td><%= data.username %></td>
+	    <td><%= data.coins %></td>
+            <td><%= data.complete_games %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="7">No Data Found</td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+  </div>
 </div>
 </html>

@@ -9,6 +9,7 @@
 <body>
     <div class="header">
         <h1><a href="/home">Risky Battlesnakes</a></h1>
+        <h2><%= username %> - <%= coins %>¢</h2>
         <div class="line"></div>
         <li class="divider2"></li>
         <div class="navigation">
@@ -19,9 +20,9 @@
                 <li class="divider"></li>
                 <li><a href="/risk">Risk</a></li>
                 <li class="divider"></li>
-                <li><a href="/more">More+</a></li>
+                <li><a href="/leaderboard">Leaderboard</a></li>
                 <li class="divider"></li>
-                <li><a href="/store">Credits</a></li
+                <li><a href="/credits">Credits</a></li
             </ul>
             <li class="divider2"></li>
             <img src="/images/Xmas.png" alt="Title" class="Xtree">
@@ -45,4 +46,15 @@
         </div>
     </div>
 </body>
+<!--<div class="ad">-->
+<!--    const sql = 'SELECT Coins FROM Logins WHERE Username = ?';-->
+
+<!--    db.query(sql, [`${username}`], (err, results) => {-->
+<!--    const coins = results[0].Coins;-->
+<!--    console.log('Coins:', coins); // Log the value of coins-->
+<!--    res.render('risk', { username: username, coins: coins });-->
+<!--    });-->
+<!--    <a href="/snakes"><img src="/images/white1.png" alt="Rectangle 1"></a>-->
+<!--</div>-->
+
 </html>
