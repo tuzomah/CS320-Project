@@ -80,29 +80,20 @@ router.get('/home', async (req, res) => {
   res.render('home', { username, coins });
 });
 
-router.get('/leaderboard', (req, res) => {
+router.get('/leaderboard', async (req, res) => {
   const username = req.session.username;
-  const sql = 'SELECT Coins FROM Logins WHERE Username = ?';
-
-  db.query(sql, [`${username}`], (err, results) => {
-    const coins = results[0].Coins;
-    const sqlTable = 'SELECT * FROM Logins';
-    db.query(sqlTable, (err, data) => {
-      if (err) throw err;
-      res.render('leaderboard', { username: username, coins: coins,title: 'User List', userData: data});
+  const coins = await getCoins(username);
+  const sqlTable = 'SELECT * FROM Logins';
+  db.query(sqlTable, (err, data) => {
+    if (err) throw err;
+      res.render('leaderboard', { username: username, coins: coins, title: 'User List', userData: data});
     });
-  });
 });
 
-router.get('/credits', (req, res) => {
+router.get('/credits', async (req, res) => {
   const username = req.session.username;
-  const sql = 'SELECT Coins FROM Logins WHERE Username = ?';
-
-  db.query(sql, [`${username}`], (err, results) => {
-    const coins = results[0].Coins;
-    console.log('Coins:', coins); // Log the value of coins
-    res.render('credits', { username: username, coins: coins });
-  });
+  const coins = await getCoins(username);
+  res.render('credits', { username, coins });
 });
 
 router.get('/testsession', (req, res) => {
