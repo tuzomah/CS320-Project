@@ -4,12 +4,14 @@ const router = express.Router();
 const db = require('../database');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const { getCoins } = require('../util');
+const { getCoins, chooseAd } = require('../util');
 
 router.get('/', async (req, res) => {
     const username = req.session.username;
     const coins = await getCoins(username);
-    res.render('snakes', { username, coins });
+    const { image_name, link } = await chooseAd();
+    res.render('snakes', { username, coins, image_name, link });
 });;
 
 module.exports = router;
+

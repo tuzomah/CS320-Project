@@ -4,12 +4,11 @@ const router = express.Router();
 const db = require('../database');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const { getCoins } = require('../util');
+const { getCoins, chooseAd } = require('../util');
+const { handleRiskRoute, getAreaInfoFromDatabase } = require('../public/javascripts/riskLogic');
 
 router.get('/', async (req, res) => {
-    const username = req.session.username;
-    const coins = await getCoins(username);
-    res.render('risk', { username, coins });
-});;
+    await handleRiskRoute(req, res);
+});
 
 module.exports = router;

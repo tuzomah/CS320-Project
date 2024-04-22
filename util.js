@@ -12,7 +12,8 @@ function getCoins(username) {
         db.query(sql, [username], (err, results) => {
             if (err) {
                 reject(err);
-            } else {
+            }
+            else {
                 const coins = results.length > 0 ? results[0].Coins : null;
                 resolve(coins);
             }
@@ -20,6 +21,26 @@ function getCoins(username) {
     });
 }
 
+function chooseAd() {
+    return new Promise((resolve, reject) => {
+        var randomNumber = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
+        const sql = 'SELECT image_name, link FROM ads WHERE ad_num = ?';
+
+        db.query(sql, [randomNumber], (err, results) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                console.log("Query Results:", results); // Log the results of the query
+                const image_name = results[0].image_name;
+                const link = results[0].link;
+                resolve({ image_name, link });
+            }
+        });
+    });
+}
+
 module.exports = {
-    getCoins
+    getCoins,
+    chooseAd
 };

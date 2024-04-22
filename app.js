@@ -11,6 +11,7 @@ var snakesRouter = require('./routes/snakes');
 var battleshipRouter = require('./routes/battleship');
 var mysql = require('mysql');
 const session = require('express-session');
+const handleRiskRoute = require('./public/javascripts/riskLogic');
 
 var app = express();
 var port = 3000;

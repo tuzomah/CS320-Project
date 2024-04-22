@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require('../database');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const { getCoins } = require('../util');
+const { getCoins, chooseAd } = require('../util');
 
 router.get('/', (req, res) => {
   res.redirect('/login');
@@ -83,28 +83,27 @@ router.get('/home', async (req, res) => {
 router.get('/leaderboard', async (req, res) => {
   const username = req.session.username;
   const coins = await getCoins(username);
+  const { image_name, link } = await chooseAd();
   const sqlTable = 'SELECT * FROM Logins';
   db.query(sqlTable, (err, data) => {
     if (err) throw err;
-      res.render('leaderboard', { username: username, coins: coins, title: 'User List', userData: data});
+      res.render('leaderboard', { username: username, coins: coins, title: 'User List', userData: data, image_name: image_name, link: link});
     });
 });
 
 router.get('/credits', async (req, res) => {
   const username = req.session.username;
   const coins = await getCoins(username);
-  res.render('credits', { username, coins });
+  const { image_name, link } = await chooseAd();
+  res.render('credits', { username, coins, image_name, link });
 });
 
 router.get('/testsession', (req, res) => {
   if (req.session && req.session.username) {
-    // Session exists and contains a username
     const username = req.session.username;
-    // Proceed with handling the request
     res.send(`Hello, ${username}!`);
-  } else {
-    // No session established or username not present in the session
-    // Handle this case, such as redirecting to login page or displaying an error message
+  }
+  else {
     res.send('You are not logged in.');
   }
 });

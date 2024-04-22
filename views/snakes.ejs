@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SnakesnLadders</title>
-    <link rel="stylesheet" href="snakes.css">
+    <link rel="stylesheet" href="\stylesheets\snakes.css">
 </head>
-
-
 <body>
     <div class="header">
-        <h1><a href="/home">Risky Battlesnakes</a></h1>
-	<h2><%= username %> - <%= coins %>¢</h2>
+        <h1><a href="/home"><img src="/images/combine.png" alt="Title" class="titleI"></a></h1>
+        <h2><%= username %> - <%= coins %>¢</h2>
         <div class="line"></div>
         <li class="divider2"></li>
         <div class="navigation">
@@ -27,18 +23,17 @@
                 <li class="divider"></li>
                 <li><a href="/leaderboard">Leaderboard</a></li>
                 <li class="divider"></li>
-                <li><a href="/credits">Credits</a></li
+                <li><a href="/credits">Credits</a></li>
             </ul>
             <li class="divider2"></li>
-            <img src="/images/Xmas.png" alt="Title" class="Xtree">
-            <img src="/images/Duck.png" alt="Title" class="Duck">
-            <a href="/login"><img src="/images/login.png" alt="Login" class="login"></a>
         </div>
     </div>
-   
+    <footer class="footer">
+        <p>Copyright 2024</p>
+    </footer>
 </body>
 <div class="grid">
-    <h1 id="gameheader" >Snakes and ladder</h1>
+    <h1 id="gameheader" >Snakes and Ladders</h1>
 
     <div id="diceCont">
         <p>Red's Turn : </p>
@@ -363,29 +358,29 @@
 
     <img src="snake ladder.png" alt="">
 
-    </div>
+</div>
 <script>
-let tog = 1
+    let tog = 1
     let rollingSound = new Audio('SnakesAndLadder_rpg-dice-rolling-95182.mp3')
     let winSound = new Audio('SnakesAndLadder_winharpsichord-39642.mp3')
-    
-    
-    
+
+
+
     let p1sum = 0
     let p2sum = 0
-    
-    
+
+
     function play(player, psum, correction, num) {
         let sum
         if (psum == 'p1sum') {
-    
+
             p1sum = p1sum + num
-    
+
             if (p1sum > 100) {
                 p1sum = p1sum - num
                 // sum = p1sum
             }
-    
+
             if (p1sum == 1) {
                 p1sum = 38
             }
@@ -431,23 +426,23 @@ let tog = 1
             if (p1sum == 97) {
                 p1sum = 78
             }
-    
+
             sum = p1sum
-    
-    
-    
+
+
+
         }
-    
+
         if (psum == 'p2sum') {
-    
+
             p2sum = p2sum + num
-    
+
             if (p2sum > 100) {
                 p2sum = p2sum - num
                 // sum = p1sum
             }
-            
-    
+
+
             if (p2sum == 1) {
                 p2sum = 38
             }
@@ -493,28 +488,28 @@ let tog = 1
             if (p2sum == 97) {
                 p2sum = 78
             }
-    
+
             sum = p2sum
-    
-    
-    
+
+
+
         }
-    
-    
+
+
         document.getElementById(`${player}`).style.transition = `linear all .5s`
-    
-    
-    
-    
-    
+
+
+
+
+
         if (sum < 10) {
-    
+
             document.getElementById(`${player}`).style.left = `${(sum - 1) * 62}px`
             document.getElementById(`${player}`).style.top = `${-0 * 62 - correction}px`
-    
-    
+
+
         }
-    
+
         else if (sum == 100) {
             winSound.play()
             if (player == 'p1') {
@@ -525,16 +520,16 @@ let tog = 1
             }
             location.reload()
         }
-    
+
         else {
-    
+
             numarr = Array.from(String(sum))
             n1 = eval(numarr.shift())
             n2 = eval(numarr.pop())
             // console.log(n1, n2)
-    
+
             if (n1 % 2 != 0) {
-    
+
                 if (n2 == 0) {
                     document.getElementById(`${player}`).style.left = `${(9) * 62}px`
                     document.getElementById(`${player}`).style.top = `${(-n1 + 1) * 62 - correction}px`
@@ -542,57 +537,56 @@ let tog = 1
                 else {
                     document.getElementById(`${player}`).style.left = `${(9 - (n2 - 1)) * 62}px`
                     document.getElementById(`${player}`).style.top = `${-n1 * 62 - correction}px`
-    
+
                 }
-    
+
             }
             else if (n1 % 2 == 0) {
                 if (n2 == 0) {
-    
+
                     document.getElementById(`${player}`).style.left = `${(0) * 62}px`
                     document.getElementById(`${player}`).style.top = `${(-n1 + 1) * 62 - correction}px`
                 }
                 else {
-    
+
                     document.getElementById(`${player}`).style.left = `${(n2 - 1) * 62}px`
                     document.getElementById(`${player}`).style.top = `${-n1 * 62 - correction}px`
                 }
-    
+
             }
-    
-    
-    
+
+
+
         }
     }
-    
-    
+
+
     document.getElementById("diceBtn").addEventListener("click", function () {
         rollingSound.play()
         num = Math.floor(Math.random() * (6 - 1 + 1) + 1)
         document.getElementById("dice").innerText = num
-    
-    
+
+
         if (tog % 2 != 0) {
             document.getElementById('tog').innerText = "Yellow's Turn : "
             play('p1', 'p1sum', 0, num)
-    
+
         }
-    
+
         else if (tog % 2 == 0) {
             document.getElementById('tog').innerText = "Red's Turn : "
-    
+
             play('p2', 'p2sum', 55, num)
-    
+
         }
-    
+
         tog = tog + 1
-    
-    
-    
-    
+
+
+
+
     })
 </script>
 <script src="snakes.js"></script>
 
 </html>
-z

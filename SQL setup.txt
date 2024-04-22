@@ -17,4 +17,23 @@ INSERT INTO Logins VALUES
     ('10002', 'lwirt', 'lwirt', '100'),
     ('10003', 'tuzomah', 'tuzomah', '100');
     
-SELECT * FROM Logins;
+
+
+
+CREATE TABLE IF NOT EXISTS ads (
+  ad_num INT UNIQUE,
+  image_name VARCHAR(30),
+  link VARCHAR(50));
+  
+INSERT INTO ads VALUES
+	("1", "gcad.jpg", "https://guitarcenter.com/"),
+    ("2", "ycpad.png", "https://www.ycp.edu/"),
+    ("3", "ebayad.jpg", "https://www.ebay.com/"),
+    ("4", "mcdonaldsad.jpg", "https://www.mcdonalds.com/"),
+    ("5", "ruttersad.jpg", "https://www.rutters.com/"),
+    ("6", "mtbad.jpg", "https://www.mtb.com/"),
+    ("7", "chatgptad.jpg", "https://chat.openai.com/"),
+    ("8", "pedro.jpg", "https://www.imdb.com/title/tt0374900/"),
+    ("9", "funbrain.jpg", "https://www.funbrain.com/"),
+    ("10", "rick.jpg", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+
