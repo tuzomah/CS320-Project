@@ -107,6 +107,15 @@ btnRollDice.addEventListener("click", () => {
     }, 500);
 });
 
+import { startGame } from './riskLogic.js';
+
+// Call getSessionUsername() to set the sessionUsername variable
+
+// Update the content of the placeholder element with the fetched username
+window.onload = function() {
+    startGame();
+};
+
 // Event listener for gameboard map clicks
 document.addEventListener('DOMContentLoaded', () => {
     const areas = document.querySelectorAll('map[name="workmap"] area');
@@ -125,5 +134,4 @@ document.addEventListener('DOMContentLoaded', () => {
             summaryElement.style.display = 'block';
         });
     });
-
 });

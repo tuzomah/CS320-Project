@@ -6,12 +6,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var riskRouter = require('./routes/risk');
-var snakesRouter = require('./routes/snakes');
 var battleshipRouter = require('./routes/battleship');
 var mysql = require('mysql');
 const session = require('express-session');
-const handleRiskRoute = require('./public/javascripts/riskLogic');
 
 var app = express();
 var port = 3000;
@@ -25,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'battlesnakes')));
+app.use('/battlesnakes', express.static(path.join(__dirname, 'battlesnakes')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -37,9 +36,39 @@ app.use(session({
 
 // Routes
 app.use('/', usersRouter);
-app.use('/risk', riskRouter);
-app.use('/snakes', snakesRouter);
 app.use('/battleship', battleshipRouter);
+
+// Define route for fetching data from multiple tables
+app.get('/getMultipleTablesData', (req, res) => {
+  // Perform multiple database queries
+  const query1 = 'SELECT * FROM table1';
+  const query2 = 'SELECT * FROM table2';
+
+  // Execute queries in parallel
+  Promise.all([
+    new Promise((resolve, reject) => {
+      db.query(query1, (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      });
+    }),
+    new Promise((resolve, reject) => {
+      db.query(query2, (err, results) => {
+        if (err) reject(err);
+        else resolve(results);
+      });
+    })
+  ])
+      .then(([data1, data2]) => {
+        // Combine the results from both queries
+        const combinedData = { data1, data2 };
+        res.json(combinedData);
+      })
+      .catch(err => {
+        console.error('Error querying database:', err);
+        res.status(500).json({ error: 'Internal server error' });
+      });
+});
 
 // Error handling middleware
 app.use(function(req, res, next) {

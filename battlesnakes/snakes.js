@@ -79,7 +79,7 @@ function play(player, psum, correction, num) {
             p2sum = p2sum - num
             // sum = p1sum
         }
-
+        
 
         if (p2sum == 1) {
             p2sum = 38
