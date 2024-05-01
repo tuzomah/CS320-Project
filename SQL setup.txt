@@ -37,3 +37,10 @@ INSERT INTO ads VALUES
     ("9", "funbrain.jpg", "https://www.funbrain.com/"),
     ("10", "rick.jpg", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 
+CREATE TABLE IF NOT EXISTS SnakesnladdersMoves (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    player_id INT,
+    dice_roll INT,
+    current_position INT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
