@@ -1,0 +1,28 @@
+  1. Each player arranges their ships on their own 
+grid, which is a 10x10 square board. The ships cannot
+ overlap or be placed diagonally. The standard fleet 
+consists of five ships: aircraft carrier (5 squares), 
+battleship (4 squares), cruiser (3 squares), 
+submarine (3 squares), and destroyer (2 squares).
+  2. Once the user haw placed their ships, the game 
+begins. Players take turns firing shots at their 
+opponent's grid to locate and destroy their ships.
+  3. You rotate firing one shot per turn. The objective
+ is to accurately guess the coordinates of the opponent's 
+ships and leave them with no ships left standing. 
+  4. When it's a user's turn, they tap a grid coordinate 
+on the opponent's grid where they think an enemy ship 
+is located.
+  5. If the shot lands on a square occupied by an enemy 
+ship, it's a "hit." The player marks the hit on their 
+own "tracking" grid and gets another shot. If the shot 
+misses, it's a "miss," and the player marks the miss on 
+their tracking grid.
+  6. Once all squares of a ship have been hit, the 
+ship is "sunk." The player announces the sinking of 
+a ship.
+  7. The game continues until one player has sunk 
+all of the opponent's ships. That player is 
+declared the winner.
+  8. Make sure you check out the other games on 
+Risky Battlesakes after the winner is decided!

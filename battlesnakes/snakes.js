@@ -1,11 +1,103 @@
 let tog = 1
 let rollingSound = new Audio('SnakesAndLadder_rpg-dice-rolling-95182.mp3')
 let winSound = new Audio('SnakesAndLadder_winharpsichord-39642.mp3')
+let gameStatus = 'ongoing'
+
+rollingSound.onerror = () => console.error('Failed to load rolling sound');
+winSound.onerror = () => console.error('Failed to load win sound');
+
+function saveGameStateToBackend(player1Position, player2Position, diceRoll, currentTurn, gameStatus) {
+    const gameStateData = {
+        player1Position: player1Position,
+        player2Position: player2Position,
+        diceRoll: diceRoll,
+        currentTurn: currentTurn,
+        gameStatus: gameStatus
+    };
+
+    fetch('/save-game-state', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameStateData)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to save game state.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message); // Log success message
+        })
+        .catch(error => {
+            console.error('Error saving game state:', error);
+        });
+}
+
+function fetchGameStateFromBackend() {
+    fetch('/get-game-state')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch game state.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            updateGameStateInFronted(data);
+        })
+        .catch(error => {
+            console.error('Error fetching game state:', error);
+        });
+}
+
+window.addEventListener('load', fetchGameStateFromBackend);
+
+function updateGameStateInFronted(data) {
+    // Update player positions on the game board
+    document.getElementById('player1').style.left = `${data.player1Position * 62}px`;
+    document.getElementById('player2').style.left = `${data.player2Position * 62}px`;
+
+    // Update game status display
+    document.getElementById('gameStatus').innerText = `Game Status: ${data.gameStatus}`;
+
+    // Update turn indicator
+    document.getElementById('tog').innerText = `Current Turn: ${data.currentTurn}`;
+
+    //Check if the game has ended
+    if (data.gameStatus === 'finished') {
+        //Display a message indicating the winner
+        if (data.player1Position === 100) {
+            alert("Red Won !!");
+        }
+        else if (data.player2Position === 100) {
+            alert("Yellow Won !!");
+        }
+    }
+}
+
+function resetGame() {
+    // Reset game state variables
+    p1sum = 0;
+    p2sum = 0;
+    tog = 1;
+    gameStatus = 'ongoing';
+
+    // Reset player positions on the game board
+    document.getElementById('player1').style.left = '0px';
+    document.getElementById('player2').style.left = '0px';
+
+    // Update UI to indicate the start of a new game
+    document.getElementById('gameStatus').innerText = 'Game Status: Ongoing';
+    document.getElementById('tog').innerText = "Red's Turn : ";
 
 
-
+    document.getElementById('diceBtn').disabled = false;
+}
 let p1sum = 0
 let p2sum = 0
+
 
 
 function play(player, psum, correction, num) {
@@ -79,7 +171,7 @@ function play(player, psum, correction, num) {
             p2sum = p2sum - num
             // sum = p1sum
         }
-        
+
 
         if (p2sum == 1) {
             p2sum = 38
@@ -134,7 +226,7 @@ function play(player, psum, correction, num) {
     }
 
 
-    document.getElementById(`${player}`).style.transition = `linear all .5s`
+    document.getElementById(`${player}`).style.transition = `linear all 1s`
 
 
 
@@ -156,7 +248,8 @@ function play(player, psum, correction, num) {
         else if (player == 'p2') {
             alert("Yellow Won !!")
         }
-        location.reload()
+        gameStatus = 'finished'
+        resetGame();
     }
 
     else {
@@ -196,6 +289,9 @@ function play(player, psum, correction, num) {
 
 
     }
+
+    saveGameStateToBackend(p1sum, p2sum, num, tog, gameStatus);
+
 }
 
 
