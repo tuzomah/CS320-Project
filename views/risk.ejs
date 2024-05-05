@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk</title>
+    <link rel="stylesheet" href="\stylesheets\risk.css">
+</head>
+<body>
+<div class="header">
+    <h1><a href="/home"><img src="/images/combine.png" alt="Title" class="titleI"></a></h1>
+    <h2><%= username %> - <%= coins %>¢</h2>
+    <div class="line"></div>
+    <li class="divider2"></li>
+    <div class="navigation">
+        <ul>
+            <li><a href="../battlesnakes/snakes.html">Snakes and Ladders</a></li>
+            <li class="divider"></li>
+            <li><a href="/battleship">Battleship</a></li>
+            <li class="divider"></li>
+            <li><a href="../battlesnakes/risk.html">Risk</a></li>
+            <li class="divider"></li>
+            <li><a href="/leaderboard">Leaderboard</a></li>
+            <li class="divider"></li>
+            <li><a href="/credits">Credits</a></li>
+        </ul>
+        <li class="divider2"></li>
+    </div>
+</div>
+<div class="gamecontainer">
+    <div class="gameboard">
+        <img src="/images/GOT Risk.jpg" alt="Gameboard" usemap="#workmap" id="gameboardMap">
+        <map name="workmap">
+            <area shape="poly" coords="608,47, 633,111, 644,190, 628,245, 609,221, 602,253, 561,288, 578,356, 613,378, 612,385,
+		      			 547,372, 530,431, 463,447, 437,394, 408,496, 392,505, 382,512, 342,517, 319,502, 283,525, 233,500,
+		      			 149,515, 128,494, 157,458, 196,478, 234,433, 200,434, 168,412, 162,361, 128,379, 122,337,
+		     			 149,290, 186,305, 186,260, 205,235, 182,197, 263,140, 377,114, 392,84, 522,84, 608,47"
+                  alt="The North, home of House Stark" id="1">
+            <area shape="poly" coords="280,525, 319,502, 382,512, 431,636, 458,642, 441,666, 501,702, 457,745, 390,749, 330,795,
+					 305,785, 299,732, 321,718, 293,673, 328,672, 315,625, 343,617, 336,579, 285,592, 277,570,
+					 310,577"
+                  alt="The Riverlands, home of House Tully" id="2">
+            <area shape="poly" coords="392,505, 382,512, 431,636, 458,642, 441,666, 501,702, 574,683, 655,628, 656,577, 636,507,
+					 602,481, 540,486, 468,510"
+                  alt="The Vale, home of House Arryn" id="3">
+            <area shape="poly" coords="144,590, 164,574, 217,570, 252,600, 243,616, 163,632"
+                  alt="The Iron Islands, home of House Greyjoy" id="4">
+            <area shape="poly" coords="315,625, 328,672, 293,673, 321,718, 299,732, 305,785, 287,810, 229,820, 171,878, 159,861,
+					 157,830, 189,748, 137,759, 145,736, 195,714, 233,618"
+                  alt="The Westerlands, home of House Lannister" id="5">
+            <area shape="poly" coords="424,747, 457,745, 501,702, 568,705, 637,669, 612,782, 584,836, 540,873, 474,874, 467,876,
+					 451,806"
+                  alt="The Crownlands, home of House Targaryen" id="6">
+            <area shape="poly" coords="474,874, 540, 873, 584,836, 602,830, 652,871, 640,944, 606,988, 584,997, 562,980, 451,971,
+					 389,952, 348,971, 355,941, 423,915, 414,905, 467,900"
+                  alt="The Stormlands, home of House Baratheon" id="7">
+            <area shape="poly" coords="171,878, 229,820, 287,810, 305,785, 330,795, 390, 749, 424,747, 451,806, 467,876, 474,874,
+		     			 467,900, 414,905, 423,915, 355,941, 348,971, 289,971, 218,1064, 234,1092, 130,1134,
+		     			 115,1107, 132,1008, 150,977, 169,972, 195,928, 227,921, 171,878"
+                  alt="The Reach, home of House Tyrell" id="8">
+            <area shape="poly" coords="348,971, 389,952, 451,971, 416,1032, 568,1062, 633,1040, 655,1062, 574,1132, 263,1133,
+					 261,1087, 234,1092, 218,1064, 289,971"
+                  alt="Dorne, home of House Martell" id="9">
+        </map>
+
+    </div>
+
+
+    <div class="dice-container-attack"></div>
+    <div class="dice-container-defend"></div>
+    <button type="button" class="btn-roll-dice">Roll</button>
+    <div class="summary-container">
+        <div class="summary"></div>
+    </div>
+    <script src="/javascripts/riskDice.js" defer></script>
+    <script src="/javascripts/riskLogic.js" defer></script>
+
+</div>
+<div class="ad">
+    <a href="<%= link %>" target="_blank"><img src="/images/<%= image_name %>" alt="ad"></a>
+</div>
+<audio id="bgmusic" loop autoplay style="display: none;">
+    <source src="/audio/runescape_courage.mp3" type="audio/mpeg">
+</audio>
+<button class="mute" onclick="toggleMute()">Mute Music</button>
+<script>
+    var audio = document.getElementById("bgmusic");
+    function toggleMute() {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }
+</script>
+<footer class="footer">
+    <p>Copyright 2024</p>
+</footer>
+</body>
+</html>

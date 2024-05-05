@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create Account</title>
+  <link rel="stylesheet" href="\stylesheets\cs320.css">
+</head>
+<body>
+  <h2>Create Account</h2>
+  <div class="loginform">
+    <form action="/signup" method="post">
+        <label for="username"><b>Create Username</b></label>
+        <input type="text" placeholder="Enter Username" id="username" name="username" required><br />
+
+        <label for="password1"><b>Create Password</b></label>
+        <input type="text" placeholder="Enter Password" id="password1" name="password1" required><br />
+
+        <label for="password2"><b>Confirm Password</b></label>
+        <input type="text" placeholder="Confirm Password" id="password2" name="password2" required><br />
+
+        <button type="submit">Create Account</button>
+    </form>
+  </div>
+</body>
+    <div class="alert">
+	That username is already in use.  Try another username.
+    </div>
+    <div class="links">
+	<a href="/login">Go to login page</a>
+    </div>
+</html>

@@ -1,0 +1,410 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #cde3f5;
+    min-height: 100vh; /* Ensure body covers at least the viewport height */
+    position: relative;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 325px;
+    height: 100vh;
+    background-color: #5bafbd;
+}
+
+.titleI {
+    margin-top: 0px;
+    margin-left: 0px;
+    border-radius: 10px;
+    width: 320px;
+    height: 95px;
+}
+
+.footer {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    position: fixed; /* Change position to fixed */
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    line-height: 60px; /* Adjust line-height to match the height of the footer */
+    font-size: 16px;
+    color: #000000;
+    z-index: 1000;
+}
+
+h1 {
+    font-family: "Tempus Sans ITC", sans-serif;
+    color: #a35426;
+    margin-left: 16px;
+}
+
+h2 {
+    font-family: "Tempus Sans ITC", sans-serif;
+    color: white;
+    margin-left: 16px;
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent element */
+    cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.title-image {
+    margin-top: 20px;
+    margin-left: 12px;
+    width: 270px;
+    height: auto;
+}
+
+.Xtree {
+    margin-top: 20px;
+    margin-left: 5px;
+    border-radius: 15px;
+    width: 240px;
+    height: 335px;
+}
+
+.Duck {
+
+    margin-left: 9px;
+    width: 70px;
+    height: 65px;
+    margin-bottom: 30px;
+}
+
+.logout {
+    margin-left: 5px;
+    margin-top: 2px;
+    width: 185px;
+    height: auto;
+    margin-bottom: 25px;
+}
+
+
+.navigation {
+    position: relative;
+    margin-top: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.navigation ul li {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
+.navigation ul li a z {
+    text-decoration: none;
+    color: #8ccbdc;
+    font-size: 24px;
+}
+
+.divider {
+    width: 225px;
+    height: 2px;
+    background-color: #8ccbdc;
+    margin: 0 50px;
+}
+
+.divider2 {
+    width: 275px;
+    height: 4px;
+    background-color: #1b88bb;
+    margin: 0 25px;
+    overflow: hidden;
+}
+
+.line {
+    position: absolute;
+    top: 0;
+    left: 326px;
+    height: 100%;
+    width: 7px;
+    background-color: #e4edef;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 60px;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.image-container img {
+    width: 500px;
+    height: 400px;
+}
+
+.image-container img:nth-child(1):hover {
+    transform: translate(10px, 20px);
+}
+
+.image-container img:nth-child(2):hover {
+    transform: translate(10px, 20px);
+}
+
+.image-container img:nth-child(3):hover {
+    transform: translate(10px, 20px);
+}
+
+.image-container img:nth-child(4):hover {
+    transform: translate(10px, 20px);
+}
+
+.content {
+    margin-left: 325px;
+    display: grid;
+    width: 1200px;
+    height: 800px;
+    place-items: center;
+    text-align: center;
+    font-size:72px;
+    font-family: "Tempus Sans ITC", sans-serif;
+    font-color: white;
+}
+
+.chart {
+    float: right;
+    display: grid;
+    width: 1150px;
+    height: 800px;
+    place-items: center;
+    text-align: center;
+    font-size: 30px;
+    font-family: "Tempus Sans ITC", sans-serif;
+    font-color: white;
+}
+
+th, td {
+    padding: 3px;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.ad img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    max-width: 100%; /* Ensure the image does not exceed the width of its container */
+    max-height: 100%;
+}
+
+
+.buttonInfo {
+    font-size: inherit;
+    background-color: hsl(68, 67%, 58%);
+    padding: .5em 1em;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: .2em;
+    color: #eaf6c6;
+}
+
+.buttonInfo:hover, .buttonInfo:focus {
+    background-color: hsl(84, 73%, 51%);
+}
+
+.buttonInfo {
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+
+.buttonInfo:first-child {
+    margin-left: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.battleship-grid {
+    margin: 2vmin;
+    display: grid;
+    background-color: hsl(193, 44%, 54%);
+    grid-template-columns: repeat(10, 4.6vmin);
+    grid-template-rows: repeat(10, 4.6vmin);
+
+}
+
+.submarine-container,
+.cruiser-container {
+    --width: 3;
+}
+
+.submarine-container-vertical,
+.cruiser-container-vertical {
+    --height: 3;
+    --width: 1;
+}
+
+
+.destroyer-container {
+    --width: 2;
+}
+
+.destroyer-container-vertical { /*2*/
+    --height: 2;
+    --width: 1;
+}
+
+.carrier-container {
+    --width: 5;
+}
+
+.carrier-container-vertical {
+    --height: 5;
+    --width: 1;
+}
+
+.battleship-container {
+    --width: 4;
+}
+
+.battleship-container-vertical {
+    --height: 4;
+    --width: 1;
+}
+
+.grid-computer > .taken,
+.grid-computer > .boom {
+    background-color: hsl(193, 44%, 54%) !important;
+    border-radius: 0 !important;
+}
+
+.taken,
+.ship {
+    position: relative;
+    background-color: hsl(0, 0%, 100%);
+}
+
+.taken.start.vertical,
+.taken.start.vertical::before {
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+}
+
+.taken.end.vertical,
+.taken.end.vertical::before {
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.taken.start.horizontal,
+.taken.start.horizontal::before {
+    border-bottom-left-radius: 50%;
+    border-top-left-radius: 50%;
+}
+
+.taken.end.horizontal,
+.taken.end.horizontal::before {
+    border-bottom-right-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.taken.vertical::before,
+.taken.horizontal::before {
+    content: '';
+    position: absolute;
+    border: .3vmin solid white;
+    top: -1px;
+    bottom: -1px;
+    right: -1px;
+    left: -1px;
+}
+
+.ship > div {
+    width: 4.6vmin;
+    height: 4.6vmin;
+}
+
+.grid-display {
+    display: flex;
+}
+
+.ship {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1vmin;
+    width: calc(4.6vmin * var(--width, 1));
+    height: calc(4.6vmin * var(--height, 1));
+    border-radius: 2.3vmin;
+}
+
+.battleship-grid div {
+    border: 1px solid hsla(0, 0%, 100%, .2);
+}
+
+
+.hidden-info {
+    font-size: 1.5rem;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info-txt {
+    margin: 1rem;
+}
+
+.miss,
+.boom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boom::after,
+.miss::after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    width: 2vmin;
+    height: 2vmin;
+}
+
+.miss::after {
+    background-color: rgb(224, 218, 218);
+}
+
+.boom::after {
+    background-color: rgb(255, 115, 0);
+}
+
+.miss::before {
+    content: '';
+    position: absolute;
+    animation: hit .2s ease-out forwards;
+    border: 1vmin solid white;
+    border-radius: 100%;
+    width: 2vmin;
+    height: 2vmin;
+}
+
+.player {
+    margin: 2vmin;
+}

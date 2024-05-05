@@ -1,0 +1,16 @@
+I used a mySQL database called 'rbs' with a table called 'Logins', so those are where all the column names in the mySQL querys in the users.js file come from.
+
+make sure in the command prompt to enter: >npm install express
+					  >npm install
+					  >npm install ejs
+					  >npm install mysql
+					  >npm install express-session
+					
+In database.js use your mySQL username and password.  If you don't have a password, just remove that line from the code.
+
+
+The 'views' folder is where the html (or in this case ejs) files that show the webpages are:
+	Root page (localhost:3000/) will send the user to the login page
+	login.ejs = Login page
+	signup.ejs = Sign Up page
+	resume.ejs (we'll replace this with Lauren's home page) = Home page
