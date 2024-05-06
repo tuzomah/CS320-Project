@@ -30,8 +30,10 @@ h1 {
 
 h2 {
     font-family: "Tempus Sans ITC", sans-serif;
+    text-align: center;
     color: white;
     margin-left: 16px;
+    margin-bottom: 20px;
 }
 
 h3 {
@@ -227,6 +229,6 @@ tr:hover {
     width: 60px;
     text-align: center;
     margin-top: 10px;
-    margin-left: 5px;
-
+    margin-left: 110px;
+    font-weight: bold;
 }

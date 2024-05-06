@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const gridDisplay = document.querySelector('.grid-display')
   const userGrid = document.querySelector('.grid-user')
@@ -32,21 +30,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   rulesButton.addEventListener('click', function(event) {
     event.preventDefault();
-  
+
     const buttonRect = rulesButton.getBoundingClientRect();
     const popupLeft = buttonRect.left;
     const popupTop = buttonRect.top + buttonRect.height;
-  
+
     const rulesWindow = window.open('rules.html', 'Rules', `width=400,height=300,left=${popupLeft},top=${popupTop}`);
-  
-   
+
+
     if (rulesWindow) {  // if window open
       rulesWindow.focus();
     }
   });
 
+  function fetchDataAndUpdatePage() {
+    fetch('/risk/data')
+        .then(response => response.json())
+        .then(data => {
+          // Update the username and coins on the page
+          document.getElementById('username').textContent = data[0].username;
+          document.getElementById('coins').textContent = data[0].coins;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+  }
 
-  
+// Call the function to fetch data and update the page when the page loads
+  window.addEventListener('load', fetchDataAndUpdatePage);
+
 
   const shipArray = [ //array for ships
     {
@@ -86,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ]
 
-  
+
 
   createBoard(userGrid, squareUsers)
   createBoard(computerGrid, squareEnemy)
@@ -109,29 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function startTimer() {
+    console.log("Timer started!"); // Add this line to check if the function is called
+    textDisplay.innerHTML = "";
     let startTime = Date.now();
     timerInterval = setInterval(() => {
       let elapsedTime = Date.now() - startTime;
       let minutes = Math.floor(elapsedTime / 60000);
-      if (minutes >= 10) {
+      //textDisplay.innerHTML = minutes;
+      if (minutes >= 7) {
         clearInterval(timerInterval); // Stop the timer
-        endOfGame(); // Call endOfGame function when timer reaches 10 minutes
+        gameOvert("Battleships"); // Call endOfGame function when timer reaches 1 minute
       }
       // Update the HTML element with the timer value
       document.getElementById('rotate').innerText = `${minutes} min`;
     }, 1000); // Update timer every second
-  
-    // Add the following code below the timerInterval definition
-    const timerButton = document.getElementById('rotate');
-    timerButton.addEventListener('click', () => {
-      if (timerInterval) {
-        timerButton.innerText = `${Math.floor((Date.now() - startTime) / 60000)} min`; // Display elapsed time
-      } else {
-        timerButton.innerText = 'Show Timer'; // Initial button text
-      }
-    });
   }
-  
+
+
   function createBoard(gridLines, spotsOnGrid) { // Board creation
     for (let i = 0; i < shipLen*shipLen; i++) {
       const square = document.createElement('div')
@@ -141,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  
+
   function generate(ship) {
     let randPlacement = Math.floor(Math.random() * ship.directions.length)
     let current = ship.directions[randPlacement] //enemy locations
@@ -216,18 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let shipClass = shipNameWithLastId.slice(0, -2)
     let lastShipIndex = parseInt(shipNameWithLastId.substr(-1))
     let shipLastId = lastShipIndex + parseInt(this.dataset.id)
-  
+
     const notAllowedHorizontal = [0,10,20,30,40,50,60,70,80,90,1,11,21,31,41,51,61,71,81,91,2,22,32,42,52,62,72,82,92,3,13,23,33,43,53,63,73,83,93]
     const notAllowedVertical = [99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60]
-    
+
     let newNotAllowedHorizontal = notAllowedHorizontal.splice(0, 10 * lastShipIndex)
     let newNotAllowedVertical = notAllowedVertical.splice(0, 10 * lastShipIndex)
-  
+
     selectedShipIndex = parseInt(selectedShipNameWithIndex.substr(-1))
-  
+
     shipLastId = shipLastId - selectedShipIndex
 
-  
+
     if (isHorizont && !newNotAllowedHorizontal.includes(shipLastId)) {
       for (let i=0; i < moveShipLength; i++) {
         let directionClass
@@ -243,10 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
         squareUsers[parseInt(this.dataset.id) - selectedShipIndex + shipLen*i].classList.add('taken', 'vertical', directionClass, shipClass)
       }
     } else return
-  
+
     gridDisplay.removeChild(moveShip)
-  
-    
+
+
     const allShips = document.querySelectorAll('.ship') // checks if all ships are on grid
     allShipsPlaced = true
     allShips.forEach(ship => {
@@ -254,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         allShipsPlaced = false
       }
     })
-  
+
     if(allShipsPlaced) {
       textDisplay.innerHTML = "Ready to start the game."
     } else {
@@ -275,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }))
     }
     if (currentPlayer === 'enemy') { //code stuck on this
-      setTimeout(enemyGo, 1000)
+      setTimeout(enemyGo, 2000)
     }
   }
 
@@ -291,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let battleshipFCount = 0
 
   function showOutcome(classList) {
+    if (isGameFinished) return;
     if (!allShipsPlaced) { // wont start game til all ships are placed
       textDisplay.innerHTML = "Please place all the ships before starting the game."
       return;
@@ -303,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (obj.includes('cruiser')) cruiserCount++
       if (obj.includes('battleship')) battleshipCount++
       if (obj.includes('carrier')) carrierCount++
-     
+
     }
     if (obj.includes('taken')) {
       enemySquare.classList.add('boom')
@@ -328,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function enemyGo() {
-    const pickTaken = Math.random() < 0.25;
+    const pickTaken = Math.random() < 0.9;
     let square;
     if (pickTaken) {
       const takenSquares = squareUsers.filter(square => square.classList.contains('taken') && !square.classList.contains('boom'));
@@ -341,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // random square choosen
       square = squareUsers[Math.floor(Math.random() * squareUsers.length)];
     }
-  
+
     // Proceed with the chosen square
     if (!square.classList.contains('boom')) {
       const hit = square.classList.contains('taken');
@@ -361,10 +368,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     currentPlayer = 'user'; // Change to user's turn
   }
-  
+
 
   function checkForWins() {
- 
+
     if (destroyerCount === 2) {
       destroyerFCount = 10
     }
@@ -393,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
       enemyFBattleshipCnt = 10
     }
     if (enemyCarrierCnt === 5) {
-    enemyFCarrierCnt = 10
+      enemyFCarrierCnt = 10
     }
 
     const totalShipCount = (destroyerFCount + submarineFCount + cruiserFCount + battleshipFCount + carrierFCount)/10;
@@ -413,15 +420,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if ((enemyFDestroyerCnt + enemyFSubmarineCnt + enemyFCruiserCnt + enemyFBattleshipCnt + enemyFCarrierCnt) === 50) {
       gameOver("Enemy");
-       // enemy wins
+      // enemy wins
     }
-  
+
   }
 
   function gameOver(winner) {
     isGameFinished = true
     startButton.removeEventListener('click', playgSingle)
-  
     textDisplay.innerHTML = `${winner} wins! Game over.`;
   }
+
+  function gameOvert(winner) {
+    isGameFinished = true
+    startButton.removeEventListener('click', playgSingle)
+
+    textDisplay.innerHTML = `${winner} lost at sea! Game over.`;
+
+  }
+
+
 })

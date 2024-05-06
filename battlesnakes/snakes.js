@@ -1,3 +1,19 @@
+function fetchDataAndUpdatePage() {
+    fetch('/risk/data')
+        .then(response => response.json())
+        .then(data => {
+            // Update the username and coins on the page
+            document.getElementById('username').textContent = data[0].username;
+            document.getElementById('coins').textContent = data[0].coins;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+// Call the function to fetch data and update the page when the page loads
+window.addEventListener('load', fetchDataAndUpdatePage);
+
 let tog = 1
 let rollingSound = new Audio('SnakesAndLadder_rpg-dice-rolling-95182.mp3')
 let winSound = new Audio('SnakesAndLadder_winharpsichord-39642.mp3')

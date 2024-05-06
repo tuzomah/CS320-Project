@@ -6,7 +6,6 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const riskRouter = require('./routes/risk');
-const battleshipRouter = require('./routes/battleship');
 const mysql = require('mysql');
 const db = require('./database');
 const session = require('express-session');
@@ -37,7 +36,6 @@ app.use(session({
 
 // Routes
 app.use('/', usersRouter);
-app.use('/battleship', battleshipRouter);
 app.use('/risk', riskRouter);
 
 // Error handling middleware

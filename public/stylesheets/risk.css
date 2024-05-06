@@ -45,8 +45,10 @@ h1 {
 
 h2 {
     font-family: "Tempus Sans ITC", sans-serif;
+    text-align: center;
     color: white;
     margin-left: 16px;
+    margin-bottom: 20px;
 }
 
 a {
@@ -321,4 +323,13 @@ tr:hover {
     height: 75px;
     border-radius: 20px;
     font-size: 30px;
+}
+
+.logout {
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 110px;
+    font-weight: bold;
 }

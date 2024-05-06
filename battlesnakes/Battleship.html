@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>BattleShips</title>
     <link rel="stylesheet" href="bs.css">
-    <script src="app.js" charset="utf-8"></script>
-  </head>
-  <body>
-    <div class="header">
-        <h1><a href="/home"><img src="/images/combine.png" alt="Title" class="titleI"></a></h1>
-     
-      <div class="line"></div>
-      <li class="divider2"></li>
-      <div class="navigation">
-          <ul>
-              <li><a href="../battlesnakes/snakes.html">Snakes and Ladders</a></li>
-              <li class="divider"></li>
-              <li><a href="../battlesnakes/Battleship.html">Battleship</a></li>
-              <li class="divider"></li>
-              <li><a href="../battlesnakes/risk.html">Risk</a></li>
-              <li class="divider"></li>
-              <li><a href="/leaderboard">Leaderboard</a></li>
-              <li class="divider"></li>
-              <li><a href="/credits">Credits</a></li>
-           
-          </ul>
-          
-          <li class="divider2"></li>
-          
-        
-      </div>
-  </div>
-  
-    <div class="container">
-      <div class="battleship-grid grid-user"></div>
-      <div class="battleship-grid grid-computer"></div>
+    <script src="./app.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="header">
+    <h1><a href="/home"><img src="/images/combine.png" alt="Title" class="titleI"></a></h1>
+    <h2><span id="username"></span> - <span id="coins"></span>¢</h2>
+    <div class="line"></div>
+    <li class="divider2"></li>
+    <div class="navigation">
+        <ul>
+            <li><a href="../battlesnakes/snakes.html">Snakes and Ladders</a></li>
+            <li class="divider"></li>
+            <li><a href="../battlesnakes/Battleship.html">Battleship</a></li>
+            <li class="divider"></li>
+            <li><a href="../battlesnakes/risk.html">Risk</a></li>
+            <li class="divider"></li>
+            <li><a href="/leaderboard">Leaderboard</a></li>
+            <li class="divider"></li>
+            <li><a href="/credits">Credits</a></li>
+        </ul>
+        <li class="divider2"></li>
     </div>
+    <li><a href="/logout"><button class="logout">Logout</button></a></li>
+</div>
 
-    <div class="container hidden-info">
-      <div class="setup-buttons" id="setup-buttons">
+<div class="container">
+    <div class="battleship-grid grid-user"></div>
+    <div class="battleship-grid grid-computer"></div>
+</div>
+
+<div class="container hidden-info">
+    <div class="setup-buttons" id="setup-buttons">
         <button id="start" class="buttonInfo">Start Game</button>
         <button id="rotate" class="buttonInfo">Rotate Your Ships</button>
         <button id="rules" class="buttonInfo">Rules</button>
-      </div>
-      <h3 id="info" class="info-txt"></h3>
-    </div>
-      
-      </div>
-      <div class="audio-controls" onclick="toggleAudio()"></div>
-      <audio id="audio" src="pirate.mp3" autoplay loop></audio></div>
 
-    <div class="container">
-      <div class="grid-display">
+    </div>
+    <h3 id="info" class="info-txt"></h3>
+</div>
+
+</div>
+<div class="audio-controls" onclick="toggleAudio()"></div>
+
+<audio id="audio" src="pirate.mp3" autoplay loop></audio></div>
+
+<div class="container">
+    <div class="grid-display">
         <div class="ship destroyer-container" draggable="true"><div id="destroyer-0"></div><div id="destroyer-1"></div></div>
         <div class="ship submarine-container" draggable="true"><div id="submarine-0"></div><div id="submarine-1"></div><div id="submarine-2"></div></div>
         <div class="ship cruiser-container" draggable="true"><div id="cruiser-0"></div><div id="cruiser-1"></div><div id="cruiser-2"></div></div>
         <div class="ship battleship-container" draggable="true"><div id="battleship-0"></div><div id="battleship-1"></div><div id="battleship-2"></div><div id="battleship-3"></div></div>
         <div class="ship carrier-container" draggable="true"><div id="carrier-0"></div><div id="carrier-1"></div><div id="carrier-2"></div><div id="carrier-3"></div><div id="carrier-4"></div></div>
-      </div>
     </div>
-    <div class="ship-info-container">
-      <img src="wheel.png" alt="Wheel Icon" class="wheel-icon">
-      <div id="ship-count-info"> User progress: <span id="total-ship-count">0</span><span>/5</span></div>
-      <div id="enemy-ship-count-info"> Enemy progress: <span id="enemy-total-ship-count">0</span><span>/5</span></div>
-    </div>
-    
-    <audio src="pirate.mp3" autoplay loop ></audio>
-    <script>
-      // Function to toggle play/pause of the audio
-      function toggleAudio() {
+</div>
+<div class="ship-info-container">
+    <img src="wheel.png" alt="Wheel Icon" class="wheel-icon">
+    <div id="ship-count-info"> User progress: <span id="total-ship-count">0</span><span>/5</span></div>
+    <div id="enemy-ship-count-info"> Enemy progress: <span id="enemy-total-ship-count">0</span><span>/5</span></div>
+</div>
+
+<audio src="pirate.mp3" autoplay loop ></audio>
+<script>
+
+    // Function to toggleplay of the audio
+    function toggleAudio() {
         var audio = document.getElementById('audio');
+        var audioControls = document.querySelector('.audio-controls');
         if (audio.paused) {
-          audio.play();
+            audio.play();
+            audioControls.classList.add('paused');
         } else {
-          audio.pause();
+            audio.pause();
+            audioControls.classList.remove('paused');
         }
-      }
-    </script>
-  
-  </body>
+    }
+</script>
+
+</body>
 </html>
